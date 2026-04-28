@@ -1,5 +1,5 @@
 export type PostureId =
-  | 'champion' | 'creator' | 'cultivator' | 'contributor' | 'consumer'
+  | 'champion' | 'creator' | 'cultivator' | 'contributor' | 'connoisseur'
   | 'crusader' | 'capitalist' | 'contemplative' | 'custodian';
 
 export type Posture = {
@@ -27,8 +27,8 @@ export const POSTURES: Posture[] = [
     desc: 'Pursue measurable excellence. Need a standard to climb toward and a scoreboard that tells the truth.',
     longDesc: 'Champions build their lives around performance and rank. They\'re happiest when there\'s a clear ladder to climb and honest feedback about where they stand. The domain doesn\'t matter. It could be surgery, chess, sales quotas, or free-throw percentage. What matters is that the game has rules, the rules are fair, and they can tell whether they\'re getting better. They thrive under pressure and seek out harder opponents rather than easier ones. The risk is that winning can become the only language they speak.',
     examples: 'Professional athletes, surgeons, trial lawyers, chess grandmasters, elite sales reps, concert pianists, Olympic coaches, competitive debaters, Michelin-starred chefs, fighter pilots.',
-    telltale: 'They know their numbers. Ask a Champion how they\'re doing and they\'ll quote a metric. Their time, their ranking, their close rate. They measure what they love.',
-    healthy: { name: 'The Master', text: 'Competes with yesterday\'s self more than with anyone in the room. Mentors younger players without feeling threatened. Knows when mastery means leaving the arena, retiring at the top, stepping aside for the next generation. Their excellence pulls others upward rather than pushing them down.' },
+    telltale: 'They know their numbers. Ask a Champion how they\'re doing and they\'ll quote a metric: their time, their ranking, their close rate. They measure what they love.',
+    healthy: { name: 'The Master', text: 'Competes with yesterday\'s self more than with anyone in the room. Mentors younger players without feeling threatened. Knows when mastery means walking away. Retiring at the top, stepping aside for the next generation. Their excellence pulls others upward rather than pushing them down.' },
     unhealthy: { name: 'The Gladiator', text: 'Identity is fused to the ranking. A single loss feels like an existential crisis. They can\'t separate a bad quarter from a bad self. Peers become threats. Juniors become dangers. They start sabotaging others\' progress to protect their position, and the thing they loved becomes a cage they can\'t leave.' },
     art: '/art/champion.jpg',
   },
@@ -42,7 +42,7 @@ export const POSTURES: Posture[] = [
     longDesc: 'Creators live for the moment when something that didn\'t exist before suddenly does. The medium varies wildly. Code, paint, words, buildings, recipes, businesses. But the feeling is the same: the raw material yields, and something new stands where nothing stood. They\'re often restless between projects and feel most alive in the middle of making. They see the world as raw material and are never quite satisfied with the way things are, not out of complaint, but because they can always imagine a version that doesn\'t exist yet.',
     examples: 'Novelists, game designers, architects, filmmakers, songwriters, indie developers, choreographers, startup founders in the zero-to-one phase, product designers, screenwriters, graffiti artists, woodworkers.',
     telltale: 'Their shelves and hard drives are full of half-finished things. They talk about projects in terms of what\'s possible, not what\'s practical. They light up when describing something they\'re building.',
-    healthy: { name: 'The Artist', text: 'Ships work. Doesn\'t just start things. Finishes them and lets them be imperfect. Develops craft over decades rather than chasing novelty. Has a genuine point of view that deepens with time. Knows that editing is creating too, and that a body of work matters more than any single piece.' },
+    healthy: { name: 'The Artist', text: 'Ships work. Doesn\'t just start things but finishes them, and lets them be imperfect. Develops craft over decades rather than chasing novelty. Has a genuine point of view that deepens with time. Knows that editing is creating too, and that a body of work matters more than any single piece.' },
     unhealthy: { name: 'The Dabbler', text: 'Forty started projects, zero finished. Addicted to the dopamine hit of starting. The blank page, the new repo, the fresh canvas. Confuses inspiration with output. Abandons work the moment it gets hard or boring, which is exactly when real creative work begins. May hoard tools and materials as a substitute for actually making things.' },
     art: '/art/creator.jpg',
   },
@@ -75,18 +75,18 @@ export const POSTURES: Posture[] = [
     art: '/art/contributor.jpg',
   },
   {
-    id: 'consumer',
-    name: 'Consumers',
-    colorVar: 'var(--color-consumer)',
+    id: 'connoisseur',
+    name: 'Connoisseurs',
+    colorVar: 'var(--color-connoisseur)',
     tag: 'Driven to enjoy',
     iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>`,
     desc: 'Experience and enjoy. Life measured in good meals, good afternoons, good stories.',
-    longDesc: 'Consumers get misread as shallow, but the real drive is presence. They\'re tuned toward savoring. Tasting, watching, traveling, reading, listening. They believe experience is its own reward, and they\'re often the ones who remind the rest of us that the point of building something is, eventually, to enjoy it. They shape their lives around quality of experience. They\'re the friend who always knows the right restaurant, the right album, the right trail. At their best, they teach others to slow down and be where they are.',
+    longDesc: 'Connoisseurs get misread as shallow, but the real drive is presence. They\'re tuned toward savoring. Tasting, watching, traveling, reading, listening. They believe experience is its own reward, and they\'re often the ones who remind the rest of us that the point of building something is, eventually, to enjoy it. They shape their lives around quality of experience. They\'re the friend who always knows the right restaurant, the right album, the right trail. At their best, they teach others to slow down and be where they are.',
     examples: 'Retirees enjoying what they built, hobbyists, world travelers, food and wine enthusiasts, audiophiles, art collectors, readers who finish 60 books a year, sport-fishing devotees, amateur astronomers, people who build their lives around their weekends.',
-    telltale: 'They describe experiences the way Creators describe projects, with specificity and love. They remember the name of the waiter and what they ordered. They have strong opinions about olive oil.',
+    telltale: 'They describe experiences the way Creators describe projects: with specificity and love. They remember the name of the waiter and what they ordered. They have strong opinions about olive oil.',
     healthy: { name: 'The Epicurean', text: 'Present. Grateful. Doesn\'t need more. Just needs to actually taste what\'s already here. Makes ordinary life feel like a life well-lived. Shares their joy generously. Knows that pleasure and meaning aren\'t opposites. Brings warmth into rooms and gives other people permission to enjoy things too.' },
     unhealthy: { name: 'The Glutton', text: 'Chases stimulation because stillness is unbearable. The dose keeps going up: more exotic trips, more expensive wine, more content consumed, more novelty. Numbs rather than savors. Uses pleasure as an escape from the harder parts of life. Eventually, nothing tastes like enough. The pursuit of enjoyment becomes its own kind of compulsion.' },
-    art: '/art/consumer.jpg',
+    art: '/art/connoisseur.jpg',
   },
   {
     id: 'crusader',
@@ -122,7 +122,7 @@ export const POSTURES: Posture[] = [
     colorVar: 'var(--color-contemplative)',
     tag: 'Driven to understand',
     iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/><path d="m13.56 11.747 4.332-.924"/><path d="m16 21-3.105-6.21"/><path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z"/><path d="m6.158 8.633 1.114 4.456"/><path d="m8 21 3.105-6.21"/><circle cx="12" cy="13" r="2"/></svg>`,
-    desc: 'Need to understand. Not to deploy knowledge, just to know. Produce frameworks others use a generation later.',
+    desc: 'Need to understand. Not to deploy knowledge. Just to know. Produce frameworks others use a generation later.',
     longDesc: 'Contemplatives are driven by questions, not answers. They need to understand how things work, why people behave the way they do, what\'s really going on beneath the surface. They\'re not interested in knowledge as a career tool. They\'d study the thing even if no one paid them. They tend to read more than they write, think more than they speak, and observe more than they participate. The world often catches up to their ideas years after they had them. They produce the frameworks, models, and deep insights that more action-oriented people eventually pick up.',
     examples: 'Theologians, theoretical physicists, philosophers, monks, mathematicians, essayists, psychoanalysts, historians, literary critics, systems theorists, research scientists, librarians who actually read the books, long-form journalists, people with three half-finished dissertations.',
     telltale: 'They answer questions with better questions. They\'ve been thinking about the same problem for years. Their bookshelves are annotated. They\'re happiest in a quiet room with a difficult text.',
@@ -147,7 +147,7 @@ export const POSTURES: Posture[] = [
 ];
 
 export const POSTURE_ORDER: PostureId[] = [
-  'champion', 'creator', 'cultivator', 'contributor', 'consumer',
+  'champion', 'creator', 'cultivator', 'contributor', 'connoisseur',
   'crusader', 'capitalist', 'contemplative', 'custodian',
 ];
 

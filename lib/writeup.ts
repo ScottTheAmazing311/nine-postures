@@ -13,7 +13,7 @@ const VERBS: Record<PostureId, [string, string]> = {
   creator:        ['make things', 'lives to bring new things into being'],
   cultivator:     ['grow people', 'lives to refine and tend'],
   contributor:    ['show up reliably', 'lives in service of the whole'],
-  consumer:       ['enjoy and rest', 'lives to taste the world'],
+  connoisseur:    ['savor and appreciate', 'lives to taste the world'],
   crusader:       ['fight for the cause', 'lives for what should change'],
   capitalist:     ['build leverage', 'lives to scale and decide'],
   contemplative:  ['sit with questions', 'lives to understand'],
