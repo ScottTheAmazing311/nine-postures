@@ -24,6 +24,28 @@ function verbFor(id: PostureId, future: boolean) {
   return VERBS[id][future ? 1 : 0];
 }
 
+// Title words per posture: [adjective, noun]
+// Adjective used in want/sometimes slots, noun used in usually slot
+const TITLE_WORDS: Record<PostureId, [string, string]> = {
+  champion:      ['Fierce',      'Champion'],
+  creator:       ['Creative',    'Maker'],
+  cultivator:    ['Nurturing',   'Cultivator'],
+  contributor:   ['Steadfast',   'Steward'],
+  connoisseur:   ['Discerning',  'Epicure'],
+  crusader:      ['Reforming',   'Crusader'],
+  capitalist:    ['Strategic',   'Architect'],
+  contemplative: ['Scholarly',   'Philosopher'],
+  custodian:     ['Vigilant',    'Guardian'],
+};
+
+export function generateTitle(slots: [PostureId, PostureId, PostureId]): string {
+  const [usually, sometimes, want] = slots;
+  const wantAdj = TITLE_WORDS[want][0];
+  const sometimesAdj = TITLE_WORDS[sometimes][0];
+  const usuallyNoun = TITLE_WORDS[usually][1];
+  return `${wantAdj} ${sometimesAdj} ${usuallyNoun}`;
+}
+
 export function generateWriteUp(slots: [PostureId, PostureId, PostureId]): string {
   const [usually, sometimes, want] = slots.map(getPostureById);
 

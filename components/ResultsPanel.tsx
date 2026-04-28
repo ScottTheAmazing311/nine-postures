@@ -1,7 +1,7 @@
 'use client';
 
 import { PostureId, getPostureById } from '@/lib/postures';
-import { generateWriteUp } from '@/lib/writeup';
+import { generateWriteUp, generateTitle } from '@/lib/writeup';
 import { encodeTrio } from '@/lib/hash';
 import CopyToast from './CopyToast';
 import { useState, useEffect, useRef } from 'react';
@@ -28,6 +28,7 @@ export default function ResultsPanel({ slots, onReset }: Props) {
   }, []);
 
   const postures = slots.map(getPostureById);
+  const title = generateTitle(slots);
   const writeUp = generateWriteUp(slots);
 
   const handleCopy = async () => {
@@ -58,9 +59,9 @@ export default function ResultsPanel({ slots, onReset }: Props) {
       >
         <div className="rounded-[28px] bg-paper border border-ink/6 p-8 md:p-10" style={{ boxShadow: 'var(--shadow-elev)' }}>
           {/* Eyebrow */}
-          <p className="text-xs uppercase tracking-widest text-ink-soft/60 mb-2 text-center">Your Trio</p>
-          <h2 className="font-display font-normal italic text-3xl text-ink text-center mb-8">
-            A reading of <em className="font-medium">your three</em>
+          <p className="text-xs uppercase tracking-widest text-ink-soft/60 mb-2 text-center">You are the</p>
+          <h2 className="font-display font-medium text-3xl md:text-4xl text-ink text-center mb-8">
+            {title}
           </h2>
 
           {/* Trio summary */}
