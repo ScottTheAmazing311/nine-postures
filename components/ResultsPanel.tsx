@@ -2,7 +2,6 @@
 
 import { PostureId, getPostureById } from '@/lib/postures';
 import { generateWriteUp, generateTitle, generateAcronym, generateEmojiCode, generateGrowthAdvice, generatePairings } from '@/lib/writeup';
-import { encodeTrio } from '@/lib/hash';
 import CopyToast from './CopyToast';
 import { useState, useEffect, useRef } from 'react';
 
@@ -36,23 +35,10 @@ export default function ResultsPanel({ slots, onReset }: Props) {
   const pairings = generatePairings(slots);
 
   const handleCopy = async () => {
-    const hash = encodeTrio(slots);
-    const url = `${window.location.origin}${window.location.pathname}#${hash}`;
-    window.location.hash = hash;
-
-    const lines = [
-      `My Nine Postures: ${title}`,
-      `${acronym} ${emojiCode}`,
-      '',
-      `${postures[0].emoji} ${postures[0].name} (usually)`,
-      `${postures[1].emoji} ${postures[1].name} (sometimes)`,
-      `${postures[2].emoji} ${postures[2].name} (aspiring)`,
-      '',
-      url,
-    ];
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
 
     try {
-      await navigator.clipboard.writeText(lines.join('\n'));
+      await navigator.clipboard.writeText(baseUrl);
       setToastVisible(true);
       setTimeout(() => setToastVisible(false), 2200);
     } catch {
