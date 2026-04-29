@@ -106,6 +106,16 @@ export default function ResultsPanel({ slots, onReset }: Props) {
             ))}
           </div>
 
+          {/* Share CTA */}
+          <div className="text-center mb-8 sm:mb-10">
+            <button
+              onClick={handleCopy}
+              className="px-8 py-3 rounded-full bg-ink text-paper font-medium transition-all duration-200 hover:bg-ink/80 focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:outline-none"
+            >
+              Share your Posture!
+            </button>
+          </div>
+
           {/* Write-up */}
           <div
             className="font-display text-base sm:text-lg leading-relaxed text-ink space-y-3 sm:space-y-4 mb-8 sm:mb-10 max-w-prose mx-auto [&_em]:font-medium [&_em]:not-italic [&_em]:underline [&_em]:decoration-ink/20 [&_em]:underline-offset-2"
