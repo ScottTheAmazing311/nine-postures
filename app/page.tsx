@@ -229,13 +229,6 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Section divider */}
-      <div className="flex items-center gap-4 mb-8 sm:mb-12">
-        <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
-        <p className="font-display italic text-ink-soft text-lg">the nine</p>
-        <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
-      </div>
-
       {/* Postures grid */}
       <div className="w-full max-w-[900px] grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
         {POSTURES.map((posture, i) => (
