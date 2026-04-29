@@ -9,6 +9,7 @@ import PostureModal from '@/components/PostureModal';
 import ResultsPanel from '@/components/ResultsPanel';
 import TapHint from '@/components/TapHint';
 import PostureExplainer from '@/components/PostureExplainer';
+import Quiz from '@/components/Quiz';
 
 type SlotIndex = 0 | 1 | 2;
 type Slots = [PostureId | null, PostureId | null, PostureId | null];
@@ -23,6 +24,7 @@ export default function Home() {
   const [slots, setSlots] = useState<Slots>([null, null, null]);
   const [tappedSource, setTappedSource] = useState<PostureId | null>(null);
   const [modalPosture, setModalPosture] = useState<PostureId | null>(null);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   // Rehydrate from hash on mount
   useEffect(() => {
@@ -93,6 +95,11 @@ export default function Home() {
     setTappedSource(null);
   }, []);
 
+  const handleQuizComplete = useCallback((results: [PostureId, PostureId, PostureId]) => {
+    setSlots(results);
+    setShowQuiz(false);
+  }, []);
+
   // Clear tapped source when clicking outside
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -128,10 +135,16 @@ export default function Home() {
         className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-6 mb-12 text-center"
         style={{ boxShadow: 'var(--shadow-card)' }}
       >
-        <p className="text-ink-soft text-sm leading-relaxed">
+        <p className="text-ink-soft text-sm leading-relaxed mb-4">
           Everyone is a blend of all nine, but three tend to dominate. Drag a posture into each slot below,
           or tap a card then tap a slot. Long-press or right-click any card for the full description.
         </p>
+        <button
+          onClick={() => setShowQuiz(true)}
+          className="px-6 py-2.5 rounded-full border-2 border-ink/15 text-ink text-sm font-medium transition-all hover:border-ink/30 hover:bg-ink/5"
+        >
+          Not sure? Take a quiz
+        </button>
       </div>
 
       {/* Posture explainer */}
@@ -199,6 +212,14 @@ export default function Home() {
           postureId={modalPosture}
           onClose={() => setModalPosture(null)}
           onUse={handleUseFromModal}
+        />
+      )}
+
+      {/* Quiz */}
+      {showQuiz && (
+        <Quiz
+          onComplete={handleQuizComplete}
+          onClose={() => setShowQuiz(false)}
         />
       )}
     </main>

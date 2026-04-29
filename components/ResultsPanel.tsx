@@ -35,8 +35,19 @@ export default function ResultsPanel({ slots, onReset }: Props) {
     const hash = encodeTrio(slots);
     const url = `${window.location.origin}${window.location.pathname}#${hash}`;
     window.location.hash = hash;
+
+    const lines = [
+      `My Nine Postures: ${title}`,
+      '',
+      `${postures[0].emoji} ${postures[0].name} (usually)`,
+      `${postures[1].emoji} ${postures[1].name} (sometimes)`,
+      `${postures[2].emoji} ${postures[2].name} (aspiring)`,
+      '',
+      url,
+    ];
+
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(lines.join('\n'));
       setToastVisible(true);
       setTimeout(() => setToastVisible(false), 2200);
     } catch {
