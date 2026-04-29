@@ -7,7 +7,7 @@ function TabContent({ posture }: { posture: Posture }) {
   return (
     <div style={{ animation: 'fadeIn 0.2s ease-out' }}>
       {/* Hero image */}
-      <div className="relative w-full h-48 sm:h-64 md:h-72 rounded-t-[18px] sm:rounded-t-[22px] overflow-hidden -mt-[1px] -mx-[1px]" style={{ width: 'calc(100% + 2px)' }}>
+      <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-t-[18px] sm:rounded-t-[22px] overflow-hidden -mt-[1px] -mx-[1px]" style={{ width: 'calc(100% + 2px)' }}>
         <img
           src={posture.art}
           alt=""
