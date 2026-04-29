@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { PostureId, getPostureById } from '@/lib/postures';
 import { QUESTIONS, STATEMENT_OPTIONS, computeResults } from '@/lib/quiz';
-import { generateTitle } from '@/lib/writeup';
+import { generateTitle, generateAcronym, generateEmojiCode } from '@/lib/writeup';
 
 type Phase = 'intro' | 'questions' | 'results';
 
@@ -230,9 +230,12 @@ export default function Quiz({ onComplete, onClose }: Props) {
           <p className="text-xs uppercase tracking-widest text-ink-soft/60 mb-2">
             You are the
           </p>
-          <h2 className="font-display font-medium text-3xl md:text-4xl text-ink mb-8">
+          <h2 className="font-display font-medium text-3xl md:text-4xl text-ink mb-2">
             {generateTitle(results)}
           </h2>
+          <p className="text-ink-soft/60 text-sm mb-8 tracking-widest">
+            {generateAcronym(results)} {generateEmojiCode(results)}
+          </p>
 
           <div className="flex flex-col gap-3 mb-8">
             {results.map((id, i) => {
