@@ -130,6 +130,40 @@ export default function Home() {
         </p>
       </header>
 
+      {/* What this is */}
+      <div
+        className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-6 md:p-8 mb-6 text-left"
+        style={{ boxShadow: 'var(--shadow-card)' }}
+      >
+        <h2 className="font-display font-medium text-lg text-ink mb-3">This is not a personality test.</h2>
+        <div className="space-y-3 text-ink-soft text-sm leading-relaxed">
+          <p>
+            You won&apos;t get sorted into a color, a number, or a four-letter code. Nobody here is going to tell you what you are and lock you into it.
+          </p>
+          <p>
+            Postures are about motivation, not identity. What drives you. What you spend your energy on. What you wish you did more of. These things change over time, and they should. You aren&apos;t stuck.
+          </p>
+          <p>
+            You know yourself better than any quiz does. This is just a framework for thinking about it. Pick three postures that feel true right now, read what comes back, and see if it lands. If it doesn&apos;t, pick different ones. You&apos;re in charge.
+          </p>
+        </div>
+      </div>
+
+      {/* Why I built this */}
+      <div
+        className="w-full max-w-[720px] rounded-2xl bg-bg-2/50 border border-ink/6 p-6 md:p-8 mb-12"
+        style={{ boxShadow: 'var(--shadow-card)' }}
+      >
+        <p className="text-ink-soft text-sm leading-relaxed italic">
+          I built this for my kids. They&apos;re young and starting to figure out what they want to be.
+          I want them to see that all nine of these are live options. Every one of them is a good life.
+          You can make decisions and sacrifices that move you toward any of these postures. Some will
+          come more naturally than others, but none of them are closed off to you. The only thing that
+          matters is that you&apos;re becoming the best version of whichever ones you choose. Do that,
+          and you&apos;re exactly who you need to be.
+        </p>
+      </div>
+
       {/* Instructions card */}
       <div
         className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-6 mb-12 text-center"

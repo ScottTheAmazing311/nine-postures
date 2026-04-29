@@ -1,47 +1,107 @@
 import { PostureId } from './postures';
 
-export type QuizQuestion = {
+export type StatementQuestion = {
+  type: 'statement';
   text: string;
   posture: PostureId;
   bucket: 'identity' | 'aspiration';
 };
 
-export const ANSWER_OPTIONS = [
+export type PreferenceQuestion = {
+  type: 'preference';
+  text: string;
+  bucket: 'identity' | 'aspiration';
+  options: { label: string; posture: PostureId }[];
+};
+
+export type QuizQuestion = StatementQuestion | PreferenceQuestion;
+
+export const STATEMENT_OPTIONS = [
   { label: 'Very much like me', score: 3 },
   { label: 'Somewhat like me', score: 2 },
   { label: 'A little like me', score: 1 },
   { label: 'Not like me', score: 0 },
 ] as const;
 
-// 27 questions: 2 identity + 1 aspiration per posture, shuffled so no posture repeats back-to-back
 export const QUESTIONS: QuizQuestion[] = [
-  { text: "I keep score. Whether it's work, fitness, or hobbies, I track how I'm doing and where I rank.", posture: 'champion', bucket: 'identity' },
-  { text: "Watching someone I've helped succeed gives me more satisfaction than most of my own wins.", posture: 'cultivator', bucket: 'identity' },
-  { text: "I plan my weeks around experiences. A great meal, a new album, a trip, a film.", posture: 'connoisseur', bucket: 'identity' },
-  { text: "I feel restless when I'm not making something. I always need a project in progress.", posture: 'creator', bucket: 'identity' },
-  { text: "There's an issue I care about so deeply that it shapes how I spend my time and money.", posture: 'crusader', bucket: 'identity' },
-  { text: "I find deep meaning in showing up for a team or organization, even when nobody notices.", posture: 'contributor', bucket: 'identity' },
-  { text: "I think in terms of leverage. How to get more from less, how to build systems that scale.", posture: 'capitalist', bucket: 'identity' },
-  { text: "I'd happily spend a whole day reading, thinking, or researching with no practical goal in mind.", posture: 'contemplative', bucket: 'identity' },
-  { text: "I notice when things are falling apart before other people do. Systems, traditions, relationships.", posture: 'custodian', bucket: 'identity' },
-  { text: "I wish I slowed down more to actually savor and enjoy what's right in front of me.", posture: 'connoisseur', bucket: 'aspiration' },
-  { text: "I'd rather face a tough competitor than win easily. The challenge is the point.", posture: 'champion', bucket: 'identity' },
-  { text: "I wish I invested more energy in developing the people around me.", posture: 'cultivator', bucket: 'aspiration' },
-  { text: "I get more excited about starting things than finishing them.", posture: 'creator', bucket: 'identity' },
-  { text: "I wish I fought harder for the things I believe are wrong in the world.", posture: 'crusader', bucket: 'aspiration' },
-  { text: "When I describe my work, I talk about the mission before I talk about my role.", posture: 'contributor', bucket: 'identity' },
-  { text: "I wish I had more financial independence and the power to fund what I care about.", posture: 'capitalist', bucket: 'aspiration' },
-  { text: "I've been thinking about some of the same questions for years and I'm not done yet.", posture: 'contemplative', bucket: 'identity' },
-  { text: "I wish I did more to protect and preserve the things that matter before they're lost.", posture: 'custodian', bucket: 'aspiration' },
-  { text: "I wish I held myself to a higher standard and pushed harder to be the best at what I do.", posture: 'champion', bucket: 'aspiration' },
-  { text: "I notice quality and have strong opinions about things like food, design, or music.", posture: 'connoisseur', bucket: 'identity' },
-  { text: "I wish I spent more of my time building and creating new things.", posture: 'creator', bucket: 'aspiration' },
-  { text: "People regularly come to me for guidance, and I genuinely enjoy giving it.", posture: 'cultivator', bucket: 'identity' },
-  { text: "I wish I were more dedicated to serving something bigger than my own ambitions.", posture: 'contributor', bucket: 'aspiration' },
-  { text: "I've strained relationships or passed up opportunities because I wouldn't compromise on a principle.", posture: 'crusader', bucket: 'identity' },
-  { text: "I'm comfortable making bets with real stakes. Risk doesn't keep me up at night.", posture: 'capitalist', bucket: 'identity' },
-  { text: "I wish I had more time and space to study, reflect, and understand things deeply.", posture: 'contemplative', bucket: 'aspiration' },
-  { text: "I keep careful records and feel uneasy when things change too quickly.", posture: 'custodian', bucket: 'identity' },
+  // 1 – identity
+  { type: 'statement', text: "I'd take a harder path if it meant doing something really well.", posture: 'champion', bucket: 'identity' },
+  // 2 – identity
+  { type: 'statement', text: "A meal, a song, or a sunset can genuinely make my whole day.", posture: 'connoisseur', bucket: 'identity' },
+  // 3 – identity preference
+  { type: 'preference', text: "Which of these sounds like the most satisfying workday?", bucket: 'identity', options: [
+    { label: "Hitting a personal best at something you've practiced for months", posture: 'champion' },
+    { label: "Coaching someone through a problem and watching the moment it clicks", posture: 'cultivator' },
+    { label: "Closing a deal that sets up three more opportunities down the line", posture: 'capitalist' },
+    { label: "Spending the whole day deep in research with no interruptions", posture: 'contemplative' },
+  ]},
+  // 4 – identity
+  { type: 'statement', text: "I'm happiest in the middle of building something, even if no one ever sees it.", posture: 'creator', bucket: 'identity' },
+  // 5 – identity
+  { type: 'statement', text: "When I see something that's clearly unfair, I can't just let it go.", posture: 'crusader', bucket: 'identity' },
+  // 6 – identity
+  { type: 'statement', text: "I get satisfaction from being the person others can count on, even for the unglamorous stuff.", posture: 'contributor', bucket: 'identity' },
+  // 7 – identity preference
+  { type: 'preference', text: "Which project would you be most excited to take on?", bucket: 'identity', options: [
+    { label: "Designing and building something that didn't exist before", posture: 'creator' },
+    { label: "Organizing people around a cause you believe in", posture: 'crusader' },
+    { label: "Restoring something old and valuable back to what it once was", posture: 'custodian' },
+    { label: "Planning an unforgettable experience for people you love", posture: 'connoisseur' },
+  ]},
+  // 8 – identity
+  { type: 'statement', text: "I think a lot about how to turn what I have into more options and more freedom.", posture: 'capitalist', bucket: 'identity' },
+  // 9 – identity
+  { type: 'statement', text: "I'd rather understand why something works than know how to use it.", posture: 'contemplative', bucket: 'identity' },
+  // 10 – identity
+  { type: 'statement', text: "I notice when something valuable is being neglected, and it bothers me more than it bothers most people.", posture: 'custodian', bucket: 'identity' },
+  // 11 – identity
+  { type: 'statement', text: "I remember where people started, and I feel proud when I see how far they've come.", posture: 'cultivator', bucket: 'identity' },
+  // 12 – identity preference
+  { type: 'preference', text: "Which of these compliments would mean the most to you?", bucket: 'identity', options: [
+    { label: "\"Nobody does it better than you.\"", posture: 'champion' },
+    { label: "\"You changed my life.\"", posture: 'cultivator' },
+    { label: "\"You made something beautiful.\"", posture: 'creator' },
+    { label: "\"You were there when it mattered.\"", posture: 'contributor' },
+  ]},
+  // 13 – aspiration
+  { type: 'statement', text: "I wish I stopped rushing long enough to actually enjoy what I already have.", posture: 'connoisseur', bucket: 'aspiration' },
+  // 14 – identity preference
+  { type: 'preference', text: "What would you do with a free year and no financial pressure?", bucket: 'identity', options: [
+    { label: "Start a business or invest in something with real potential", posture: 'capitalist' },
+    { label: "Travel slowly and experience as much of the world as possible", posture: 'connoisseur' },
+    { label: "Study something that fascinates you just because you want to understand it", posture: 'contemplative' },
+    { label: "Join an organization you admire and do whatever they need", posture: 'contributor' },
+  ]},
+  // 15 – aspiration
+  { type: 'statement', text: "I wish I committed more fully to getting great at something instead of staying comfortable.", posture: 'champion', bucket: 'aspiration' },
+  // 16 – aspiration
+  { type: 'statement', text: "I wish I carved out more time to make things with my hands or my mind.", posture: 'creator', bucket: 'aspiration' },
+  // 17 – aspiration
+  { type: 'statement', text: "I wish I put more of my energy toward the things I think are broken in the world.", posture: 'crusader', bucket: 'aspiration' },
+  // 18 – aspiration preference
+  { type: 'preference', text: "Which of these lives sounds most appealing, even if it's not yours right now?", bucket: 'aspiration', options: [
+    { label: "A master of your craft, known for being the best at one thing", posture: 'champion' },
+    { label: "Someone who built something that grew beyond them and kept going", posture: 'capitalist' },
+    { label: "A mentor whose former students still call to say thank you", posture: 'cultivator' },
+    { label: "A quiet protector of something important that most people overlook", posture: 'custodian' },
+  ]},
+  // 19 – aspiration
+  { type: 'statement', text: "I wish I gave more of myself to something I believe in, even if it meant less recognition.", posture: 'contributor', bucket: 'aspiration' },
+  // 20 – aspiration
+  { type: 'statement', text: "I wish I had the resources and independence to make bigger bets on what I believe in.", posture: 'capitalist', bucket: 'aspiration' },
+  // 21 – aspiration
+  { type: 'statement', text: "I wish I had more space in my life to think deeply without needing a practical reason.", posture: 'contemplative', bucket: 'aspiration' },
+  // 22 – aspiration preference
+  { type: 'preference', text: "If you could have more of one quality starting tomorrow, which would it be?", bucket: 'aspiration', options: [
+    { label: "The ability to make beautiful, original things from nothing", posture: 'creator' },
+    { label: "The courage to fight for what's right no matter the personal cost", posture: 'crusader' },
+    { label: "The wisdom to sit with hard questions and not rush to answers", posture: 'contemplative' },
+    { label: "The presence to truly savor and appreciate every experience", posture: 'connoisseur' },
+  ]},
+  // 23 – aspiration
+  { type: 'statement', text: "I wish I did more to take care of the things, people, and traditions that matter most.", posture: 'custodian', bucket: 'aspiration' },
+  // 24 – aspiration
+  { type: 'statement', text: "I wish I were more patient and intentional about helping the people around me grow.", posture: 'cultivator', bucket: 'aspiration' },
 ];
 
 const ALL_POSTURES: PostureId[] = [
@@ -59,11 +119,26 @@ export function computeResults(answers: number[]): [PostureId, PostureId, Postur
   }
 
   QUESTIONS.forEach((q, i) => {
-    const score = ANSWER_OPTIONS[answers[i]]?.score ?? 0;
-    if (q.bucket === 'identity') {
-      identity[q.posture] += score;
+    const answer = answers[i];
+    if (answer == null) return;
+
+    if (q.type === 'statement') {
+      const score = STATEMENT_OPTIONS[answer]?.score ?? 0;
+      if (q.bucket === 'identity') {
+        identity[q.posture] += score;
+      } else {
+        aspiration[q.posture] += score;
+      }
     } else {
-      aspiration[q.posture] += score;
+      // Preference: selected option's posture gets 3 points
+      const selected = q.options[answer];
+      if (selected) {
+        if (q.bucket === 'identity') {
+          identity[selected.posture] += 3;
+        } else {
+          aspiration[selected.posture] += 3;
+        }
+      }
     }
   });
 

@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { PostureId, getPostureById } from '@/lib/postures';
-import { QUESTIONS, ANSWER_OPTIONS, computeResults } from '@/lib/quiz';
+import { QUESTIONS, STATEMENT_OPTIONS, computeResults } from '@/lib/quiz';
 import { generateTitle } from '@/lib/writeup';
 
 type Phase = 'intro' | 'questions' | 'results';
@@ -65,6 +65,7 @@ export default function Quiz({ onComplete, onClose }: Props) {
   }, [results, onComplete]);
 
   const progress = phase === 'questions' ? ((currentQ + 1) / QUESTIONS.length) * 100 : 0;
+  const question = QUESTIONS[currentQ];
 
   return (
     <div
@@ -92,8 +93,8 @@ export default function Quiz({ onComplete, onClose }: Props) {
             Take the quiz
           </h2>
           <p className="text-ink-soft leading-relaxed mb-8">
-            27 quick questions. For each one, pick how much it sounds like you.
-            We'll figure out your three postures from there.
+            24 quick questions about what drives you. Some are about how you already live.
+            Others are about what you wish you did more of.
           </p>
           <button
             onClick={() => setPhase('questions')}
@@ -134,36 +135,84 @@ export default function Quiz({ onComplete, onClose }: Props) {
           {/* Question */}
           <div
             key={currentQ}
-            className="text-center"
+            className="text-center w-full"
             style={{ animation: 'fadeIn 0.2s ease-out' }}
           >
-            <p className="font-display text-xl md:text-2xl text-ink leading-relaxed mb-10 max-w-md">
-              &ldquo;{QUESTIONS[currentQ].text}&rdquo;
-            </p>
-
-            {/* Answer options */}
-            <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
-              {ANSWER_OPTIONS.map((opt, i) => {
-                const isSelected = answers[currentQ] === i;
-                const justPicked = picking && isSelected;
-                return (
-                  <button
-                    key={i}
-                    onClick={() => handleAnswer(i)}
-                    disabled={picking}
-                    className="w-full py-3.5 px-6 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left"
-                    style={{
-                      borderColor: justPicked ? 'var(--color-ink)' : 'rgba(28, 24, 22, 0.1)',
-                      backgroundColor: justPicked ? 'var(--color-ink)' : 'var(--color-paper)',
-                      color: justPicked ? 'var(--color-paper)' : 'var(--color-ink)',
-                      transform: justPicked ? 'scale(0.97)' : undefined,
-                    }}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
+            {question.type === 'statement' ? (
+              <>
+                <p className="font-display text-xl md:text-2xl text-ink leading-relaxed mb-10 max-w-md mx-auto">
+                  &ldquo;{question.text}&rdquo;
+                </p>
+                <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+                  {STATEMENT_OPTIONS.map((opt, i) => {
+                    const justPicked = picking && answers[currentQ] === i;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleAnswer(i)}
+                        disabled={picking}
+                        className="w-full py-3.5 px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
+                        style={{
+                          borderColor: justPicked ? 'var(--color-ink)' : 'rgba(28, 24, 22, 0.1)',
+                          backgroundColor: justPicked ? 'var(--color-ink)' : 'var(--color-paper)',
+                          color: justPicked ? 'var(--color-paper)' : 'var(--color-ink)',
+                          transform: justPicked ? 'scale(0.97)' : undefined,
+                        }}
+                      >
+                        <span
+                          className="w-5 h-5 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors"
+                          style={{
+                            borderColor: justPicked ? 'var(--color-paper)' : 'rgba(28, 24, 22, 0.25)',
+                          }}
+                        >
+                          {justPicked && (
+                            <span className="w-2.5 h-2.5 rounded-full bg-paper" />
+                          )}
+                        </span>
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="font-display text-xl md:text-2xl text-ink leading-relaxed mb-10 max-w-md mx-auto">
+                  {question.text}
+                </p>
+                <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+                  {question.options.map((opt, i) => {
+                    const justPicked = picking && answers[currentQ] === i;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleAnswer(i)}
+                        disabled={picking}
+                        className="w-full py-3.5 px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
+                        style={{
+                          borderColor: justPicked ? 'var(--color-ink)' : 'rgba(28, 24, 22, 0.1)',
+                          backgroundColor: justPicked ? 'var(--color-ink)' : 'var(--color-paper)',
+                          color: justPicked ? 'var(--color-paper)' : 'var(--color-ink)',
+                          transform: justPicked ? 'scale(0.97)' : undefined,
+                        }}
+                      >
+                        <span
+                          className="w-5 h-5 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors"
+                          style={{
+                            borderColor: justPicked ? 'var(--color-paper)' : 'rgba(28, 24, 22, 0.25)',
+                          }}
+                        >
+                          {justPicked && (
+                            <span className="w-2.5 h-2.5 rounded-full bg-paper" />
+                          )}
+                        </span>
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
