@@ -1,7 +1,7 @@
 'use client';
 
 import { Posture, PostureId } from '@/lib/postures';
-import { useRef, useCallback } from 'react';
+import { useCallback } from 'react';
 
 type Props = {
   posture: Posture;
@@ -12,26 +12,7 @@ type Props = {
 };
 
 export default function PostureCard({ posture, isUsed, isTappedSource, onTap, onLongPress }: Props) {
-  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const didLongPress = useRef(false);
-
-  const handlePointerDown = useCallback(() => {
-    didLongPress.current = false;
-    longPressTimer.current = setTimeout(() => {
-      didLongPress.current = true;
-      onLongPress(posture.id);
-    }, 500);
-  }, [posture.id, onLongPress]);
-
-  const handlePointerUp = useCallback(() => {
-    if (longPressTimer.current) {
-      clearTimeout(longPressTimer.current);
-      longPressTimer.current = null;
-    }
-  }, []);
-
   const handleClick = useCallback(() => {
-    if (didLongPress.current) return;
     onLongPress(posture.id);
   }, [posture.id, onLongPress]);
 
@@ -56,9 +37,6 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
     <button
       draggable
       onDragStart={handleDragStart}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
-      onPointerLeave={handlePointerUp}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
       onKeyDown={handleKeyDown}
