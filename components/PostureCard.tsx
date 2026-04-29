@@ -32,8 +32,8 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
 
   const handleClick = useCallback(() => {
     if (didLongPress.current) return;
-    onTap(posture.id);
-  }, [posture.id, onTap]);
+    onLongPress(posture.id);
+  }, [posture.id, onLongPress]);
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -46,14 +46,11 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
   }, [posture.id]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && e.shiftKey) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       onLongPress(posture.id);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      onTap(posture.id);
     }
-  }, [posture.id, onTap, onLongPress]);
+  }, [posture.id, onLongPress]);
 
   return (
     <button
@@ -65,7 +62,7 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
       onClick={handleClick}
       onContextMenu={handleContextMenu}
       onKeyDown={handleKeyDown}
-      aria-label={`View ${posture.name} details`}
+      aria-label={`${posture.name}: ${posture.tag}`}
       className="group relative w-full text-left rounded-[20px] overflow-hidden bg-paper border border-ink/6 transition-all duration-250 focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:outline-none select-none"
       style={{
         boxShadow: 'var(--shadow-card)',
@@ -79,7 +76,7 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
     >
       <div className="h-1 w-full" style={{ backgroundColor: posture.colorVar }} />
 
-      <div className="relative h-28 w-full overflow-hidden bg-bg-2/50" style={{ aspectRatio: '16/7' }}>
+      <div className="relative h-20 sm:h-28 w-full overflow-hidden bg-bg-2/50">
         <img
           src={posture.art}
           alt=""
@@ -90,18 +87,18 @@ export default function PostureCard({ posture, isUsed, isTappedSource, onTap, on
         <div className="absolute inset-0 bg-gradient-to-t from-paper/80 to-transparent" />
       </div>
 
-      <div className="p-5 pt-3">
-        <div className="flex items-start gap-3">
+      <div className="p-3 sm:p-5 sm:pt-3">
+        <div className="flex items-start gap-2 sm:gap-3">
           <div
-            className="w-10 h-10 shrink-0"
+            className="w-8 h-8 sm:w-10 sm:h-10 shrink-0"
             style={{ color: posture.colorVar }}
             dangerouslySetInnerHTML={{ __html: posture.iconSvg }}
           />
           <div className="min-w-0">
-            <h3 className="font-display font-medium text-lg leading-tight text-ink">
+            <h3 className="font-display font-medium text-base sm:text-lg leading-tight text-ink">
               {posture.name}
             </h3>
-            <p className="text-sm text-ink-soft mt-0.5 italic font-display font-light">
+            <p className="text-xs sm:text-sm text-ink-soft mt-0.5 italic font-display font-light hidden sm:block">
               {posture.tag}
             </p>
           </div>

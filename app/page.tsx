@@ -115,13 +115,19 @@ export default function Home() {
   const usedPostureIds = new Set(slots.filter(Boolean) as PostureId[]);
 
   return (
-    <main id="main-content" className="relative z-10 flex flex-col items-center px-4 py-12 md:py-20 pb-32">
-      {/* Header */}
-      <header className="text-center mb-10 max-w-xl">
-        <p className="text-sm uppercase tracking-widest text-ink-soft/60 mb-3">
+    <main id="main-content" className="relative z-10 flex flex-col items-center px-4 py-8 sm:py-12 md:py-20 pb-32" style={{ paddingTop: 'max(2rem, env(safe-area-inset-top))', paddingBottom: 'max(8rem, env(safe-area-inset-bottom))' }}>
+      {/* Logo */}
+      <header className="text-center mb-8 sm:mb-10 max-w-xl">
+        <img
+          src="/logo.png"
+          alt="Nine Postures"
+          className="w-28 sm:w-36 mx-auto mb-4"
+          draggable={false}
+        />
+        <p className="text-xs sm:text-sm uppercase tracking-widest text-ink-soft/60 mb-3">
           A Self-Reflection Tool
         </p>
-        <h1 className="font-display text-4xl md:text-5xl font-light text-ink mb-4">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-ink mb-4">
           The Nine <em className="italic font-normal" style={{ fontVariationSettings: "'SOFT' 100" }}>Postures</em>
         </h1>
         <p className="text-ink-soft leading-relaxed">
@@ -130,9 +136,25 @@ export default function Home() {
         </p>
       </header>
 
+      {/* Header images */}
+      <div className="w-full max-w-[720px] mb-8 sm:mb-10 space-y-1">
+        <img
+          src="/header.png"
+          alt="The nine postures illustrated"
+          className="w-full h-auto"
+          draggable={false}
+        />
+        <img
+          src="/header2.png"
+          alt="The nine postures illustrated"
+          className="w-full h-auto"
+          draggable={false}
+        />
+      </div>
+
       {/* What this is */}
       <div
-        className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-6 md:p-8 mb-6 text-left"
+        className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-5 sm:p-6 md:p-8 mb-6 text-left"
         style={{ boxShadow: 'var(--shadow-card)' }}
       >
         <h2 className="font-display font-medium text-lg text-ink mb-3">This is not a personality test.</h2>
@@ -151,7 +173,7 @@ export default function Home() {
 
       {/* Why I built this */}
       <div
-        className="w-full max-w-[720px] rounded-2xl bg-bg-2/50 border border-ink/6 p-6 md:p-8 mb-12"
+        className="w-full max-w-[720px] rounded-2xl bg-bg-2/50 border border-ink/6 p-5 sm:p-6 md:p-8 mb-8 sm:mb-12"
         style={{ boxShadow: 'var(--shadow-card)' }}
       >
         <p className="text-ink-soft text-sm leading-relaxed italic">
@@ -166,12 +188,12 @@ export default function Home() {
 
       {/* Instructions card */}
       <div
-        className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-6 mb-12 text-center"
+        className="w-full max-w-[720px] rounded-2xl bg-paper border border-ink/6 p-5 sm:p-6 mb-8 sm:mb-12 text-center"
         style={{ boxShadow: 'var(--shadow-card)' }}
       >
         <p className="text-ink-soft text-sm leading-relaxed mb-4">
-          Everyone is a blend of all nine, but three tend to dominate. Drag a posture into each slot below,
-          or tap a card then tap a slot. Long-press or right-click any card for the full description.
+          Everyone is a blend of all nine, but three tend to dominate. Tap any card to read about it,
+          then use the button to place it in a slot. You can also drag cards directly into slots.
         </p>
         <button
           onClick={() => setShowQuiz(true)}
@@ -185,14 +207,14 @@ export default function Home() {
       <PostureExplainer />
 
       {/* Divider before selection */}
-      <div className="flex items-center gap-4 my-12">
+      <div className="flex items-center gap-4 my-8 sm:my-12">
         <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
         <p className="font-display italic text-ink-soft text-lg">choose your three</p>
         <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
       </div>
 
       {/* Slots grid */}
-      <div className="w-full max-w-[900px] grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
+      <div className="w-full max-w-[900px] grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-10 sm:mb-14">
         {SLOT_LABELS.map((label, i) => (
           <div key={label} data-slot>
             <Slot
@@ -208,14 +230,14 @@ export default function Home() {
       </div>
 
       {/* Section divider */}
-      <div className="flex items-center gap-4 mb-12">
+      <div className="flex items-center gap-4 mb-8 sm:mb-12">
         <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
         <p className="font-display italic text-ink-soft text-lg">the nine</p>
         <span className="text-ink-soft/30">&#x2022; &#x2022; &#x2022;</span>
       </div>
 
       {/* Postures grid */}
-      <div className="w-full max-w-[900px] grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div className="w-full max-w-[900px] grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
         {POSTURES.map((posture, i) => (
           <div key={posture.id} data-posture-card style={{ '--i': i } as React.CSSProperties}>
             <PostureCard

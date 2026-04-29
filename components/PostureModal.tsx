@@ -53,7 +53,7 @@ export default function PostureModal({ postureId, onClose, onUse }: Props) {
         role="dialog"
         aria-modal="true"
         aria-label={`${posture.name} details`}
-        className="relative w-full max-w-[520px] max-h-[85vh] overflow-y-auto rounded-[28px] bg-paper p-7 md:p-8"
+        className="relative w-full max-w-[520px] max-h-[90vh] overflow-y-auto rounded-[20px] sm:rounded-[28px] bg-paper p-5 sm:p-7 md:p-8"
         style={{
           boxShadow: 'var(--shadow-elev)',
           animation: 'slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',

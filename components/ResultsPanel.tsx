@@ -68,15 +68,15 @@ export default function ResultsPanel({ slots, onReset }: Props) {
         className="w-full max-w-[900px] mx-auto mt-16 scroll-mt-8"
         style={{ animation: 'slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
       >
-        <div className="rounded-[28px] bg-paper border border-ink/6 p-8 md:p-10" style={{ boxShadow: 'var(--shadow-elev)' }}>
+        <div className="rounded-[20px] sm:rounded-[28px] bg-paper border border-ink/6 p-5 sm:p-8 md:p-10" style={{ boxShadow: 'var(--shadow-elev)' }}>
           {/* Eyebrow */}
           <p className="text-xs uppercase tracking-widest text-ink-soft/60 mb-2 text-center">You are the</p>
-          <h2 className="font-display font-medium text-3xl md:text-4xl text-ink text-center mb-8">
+          <h2 className="font-display font-medium text-2xl sm:text-3xl md:text-4xl text-ink text-center mb-6 sm:mb-8">
             {title}
           </h2>
 
           {/* Trio summary */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
             {postures.map((p, i) => (
               <div
                 key={p.id}
@@ -100,7 +100,7 @@ export default function ResultsPanel({ slots, onReset }: Props) {
 
           {/* Write-up */}
           <div
-            className="font-display text-lg leading-relaxed text-ink space-y-4 mb-10 max-w-prose mx-auto [&_em]:font-medium [&_em]:not-italic [&_em]:underline [&_em]:decoration-ink/20 [&_em]:underline-offset-2"
+            className="font-display text-base sm:text-lg leading-relaxed text-ink space-y-3 sm:space-y-4 mb-8 sm:mb-10 max-w-prose mx-auto [&_em]:font-medium [&_em]:not-italic [&_em]:underline [&_em]:decoration-ink/20 [&_em]:underline-offset-2"
             dangerouslySetInnerHTML={{ __html: writeUp }}
           />
 

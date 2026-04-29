@@ -132,7 +132,7 @@ export default function PostureExplainer() {
                 if (e.key === 'ArrowLeft') { e.preventDefault(); setActiveIndex((i - 1 + POSTURES.length) % POSTURES.length); }
               }}
               tabIndex={i === activeIndex ? 0 : -1}
-              className="relative shrink-0 px-4 py-2.5 min-h-[44px] rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:outline-none hover:bg-ink/5"
+              className="relative shrink-0 px-3.5 sm:px-4 py-2.5 min-h-[44px] rounded-full text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:outline-none hover:bg-ink/5"
               style={{
                 backgroundColor: i === activeIndex ? p.colorVar : 'transparent',
                 color: i === activeIndex ? '#fffbf2' : 'var(--color-ink-soft)',
@@ -150,7 +150,7 @@ export default function PostureExplainer() {
       <div
         id={`panel-${active.id}`}
         role="tabpanel"
-        className="rounded-[24px] bg-paper border border-ink/6 p-6 md:p-8"
+        className="rounded-[20px] sm:rounded-[24px] bg-paper border border-ink/6 p-4 sm:p-6 md:p-8"
         style={{ boxShadow: 'var(--shadow-card)' }}
       >
         <TabContent key={active.id} posture={active} />

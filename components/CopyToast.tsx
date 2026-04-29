@@ -5,7 +5,8 @@ export default function CopyToast({ visible }: { visible: boolean }) {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+      className="fixed left-1/2 -translate-x-1/2 z-50"
+      style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
     >
       {visible && (
         <div

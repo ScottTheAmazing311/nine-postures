@@ -24,21 +24,12 @@
   --font-body: var(--font-dm-sans-var);
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background-image: radial-gradient(circle, var(--color-ink) 0.5px, transparent 0.5px);
-  background-size: 18px 18px;
-  opacity: 0.06;
-}
-
 body {
   background-color: var(--color-bg);
   min-height: 100vh;
   color: var(--color-ink);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 [data-posture-card] {
@@ -93,6 +84,19 @@ body {
 @keyframes slideUpToast {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

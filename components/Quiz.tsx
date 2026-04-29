@@ -69,8 +69,12 @@ export default function Quiz({ onComplete, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-bg"
-      style={{ animation: 'fadeIn 0.25s ease-out' }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-bg overflow-y-auto"
+      style={{
+        animation: 'fadeIn 0.25s ease-out',
+        paddingTop: 'env(safe-area-inset-top)',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+      }}
     >
       {/* Close button */}
       <button
@@ -107,7 +111,7 @@ export default function Quiz({ onComplete, onClose }: Props) {
 
       {/* Questions */}
       {phase === 'questions' && (
-        <div className="w-full max-w-lg px-6 flex flex-col items-center">
+        <div className="w-full max-w-lg px-4 sm:px-6 flex flex-col items-center my-auto py-6">
           {/* Progress bar */}
           <div className="w-full max-w-xs h-1 rounded-full bg-ink/10 mb-2">
             <div
@@ -140,10 +144,10 @@ export default function Quiz({ onComplete, onClose }: Props) {
           >
             {question.type === 'statement' ? (
               <>
-                <p className="font-display text-xl md:text-2xl text-ink leading-relaxed mb-10 max-w-md mx-auto">
+                <p className="font-display text-lg sm:text-xl md:text-2xl text-ink leading-relaxed mb-6 sm:mb-10 max-w-md mx-auto">
                   &ldquo;{question.text}&rdquo;
                 </p>
-                <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+                <div className="flex flex-col gap-2 sm:gap-3 w-full max-w-sm mx-auto">
                   {STATEMENT_OPTIONS.map((opt, i) => {
                     const justPicked = picking && answers[currentQ] === i;
                     return (
@@ -151,7 +155,7 @@ export default function Quiz({ onComplete, onClose }: Props) {
                         key={i}
                         onClick={() => handleAnswer(i)}
                         disabled={picking}
-                        className="w-full py-3.5 px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
                         style={{
                           borderColor: justPicked ? 'var(--color-ink)' : 'rgba(28, 24, 22, 0.1)',
                           backgroundColor: justPicked ? 'var(--color-ink)' : 'var(--color-paper)',
@@ -177,10 +181,10 @@ export default function Quiz({ onComplete, onClose }: Props) {
               </>
             ) : (
               <>
-                <p className="font-display text-xl md:text-2xl text-ink leading-relaxed mb-10 max-w-md mx-auto">
+                <p className="font-display text-lg sm:text-xl md:text-2xl text-ink leading-relaxed mb-6 sm:mb-10 max-w-md mx-auto">
                   {question.text}
                 </p>
-                <div className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+                <div className="flex flex-col gap-2 sm:gap-3 w-full max-w-sm mx-auto">
                   {question.options.map((opt, i) => {
                     const justPicked = picking && answers[currentQ] === i;
                     return (
@@ -188,7 +192,7 @@ export default function Quiz({ onComplete, onClose }: Props) {
                         key={i}
                         onClick={() => handleAnswer(i)}
                         disabled={picking}
-                        className="w-full py-3.5 px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-2xl text-sm font-medium transition-all duration-200 border-2 text-left flex items-center gap-3"
                         style={{
                           borderColor: justPicked ? 'var(--color-ink)' : 'rgba(28, 24, 22, 0.1)',
                           backgroundColor: justPicked ? 'var(--color-ink)' : 'var(--color-paper)',
@@ -220,7 +224,7 @@ export default function Quiz({ onComplete, onClose }: Props) {
       {/* Results */}
       {phase === 'results' && results && (
         <div
-          className="text-center px-6 max-w-lg"
+          className="text-center px-4 sm:px-6 max-w-lg my-auto py-6"
           style={{ animation: 'slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
         >
           <p className="text-xs uppercase tracking-widest text-ink-soft/60 mb-2">
